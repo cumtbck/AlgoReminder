@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22G720" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" accessControl="none">
+    <!-- 改进的Problem实体 -->
+    <entity name="Problem" representedClassName="Problem" syncable="YES" codeGenerationType="class">
+        <!-- 基础属性 -->
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="title" attributeType="String" defaultValueString="Untitled Problem"/>
+        <attribute name="source" attributeType="String" defaultValueString="Custom"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        
+        <!-- 分类属性 -->
+        <attribute name="algorithmType" optional="YES" attributeType="String"/>
+        <attribute name="dataStructure" optional="YES" attributeType="String"/>
+        <attribute name="difficulty" attributeType="String" defaultValueString="中等"/>
+        <attribute name="skillTags" optional="YES" attributeType="String"/>
+        <attribute name="companies" optional="YES" attributeType="String"/>
+        
+        <!-- 学习相关属性 -->
+        <attribute name="mastery" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastPracticeAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="totalReviews" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="averageScore" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="streakCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        
+        <!-- 统计属性 -->
+        <attribute name="frequency" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="acceptanceRate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="premiumOnly" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        
+        <!-- 关系 - 简化后的设计 -->
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="problems" inverseEntity="Note"/>
+        <relationship name="reviewPlans" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ReviewPlan" inverseName="problem" inverseEntity="ReviewPlan"/>
+        <relationship name="learningPath" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LearningPath" inverseName="problems" inverseEntity="LearningPath"/>
+        
+        <!-- 移除了复杂的双向关系，改用标签系统 -->
+    </entity>
+    
+    <!-- 改进的ReviewPlan实体 -->
+    <entity name="ReviewPlan" representedClassName="ReviewPlan" syncable="YES" codeGenerationType="class">
+        <!-- 基础属性 -->
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="status" attributeType="String" defaultValueString="pending"/>
+        
+        <!-- 复习间隔相关 -->
+        <attribute name="intervalLevel" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="scheduledAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        
+        <!-- 表现相关 -->
+        <attribute name="score" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="timeSpent" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="confidence" optional="YES" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
+        
+        <!-- 难度调整 -->
+        <attribute name="difficultyAdjustment" attributeType="Float" defaultValueString="1.0" usesScalarValueType="YES"/>
+        <attribute name="easeFactor" attributeType="Float" defaultValueString="2.5" usesScalarValueType="YES"/>
+        
+        <!-- 关系 -->
+        <relationship name="problem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Problem" inverseName="reviewPlans" inverseEntity="Problem"/>
+    </entity>
+    
+    <!-- 改进的Note实体 -->
+    <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <!-- 基础属性 -->
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="rawMarkdown" attributeType="String" defaultValueString=""/>
+        <attribute name="renderedHTML" optional="YES" attributeType="String"/>
+        <attribute name="noteType" attributeType="String" defaultValueString="general"/>
+        
+        <!-- 元数据 -->
+        <attribute name="tags" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="importedFromURL" optional="YES" attributeType="String"/>
+        
+        <!-- 统计 -->
+        <attribute name="viewCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="wordCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        
+        <!-- 关系 -->
+        <relationship name="problems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Problem" inverseName="notes" inverseEntity="Problem"/>
+        <!-- 移除了复杂的链接关系，改用标签和搜索功能 -->
+    </entity>
+    
+    <!-- 改进的LearningPath实体 -->
+    <entity name="LearningPath" representedClassName="LearningPath" syncable="YES" codeGenerationType="class">
+        <!-- 基础属性 -->
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" defaultValueString="00000000-0000-0000-0000-000000000000"/>
+        <attribute name="name" attributeType="String" defaultValueString="Untitled Path"/>
+        <attribute name="pathDescription" optional="YES" attributeType="String"/>
+        <attribute name="difficulty" attributeType="String" defaultValueString="中等"/>
+        <attribute name="tags" optional="YES" attributeType="String"/>
+        
+        <!-- 时间相关 -->
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="estimatedDuration" optional="YES" attributeType="Integer 32" defaultValueString="30" usesScalarValueType="YES"/>
+        <attribute name="startedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        
+        <!-- 状态 -->
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isArchived" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        
+        <!-- 进度计算 -->
+        <attribute name="progress" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalProblems" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="completedProblems" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="masteryProgress" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        
+        <!-- 关系 -->
+        <relationship name="problems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Problem" inverseName="learningPath" inverseEntity="Problem"/>
+    </entity>
+</model>

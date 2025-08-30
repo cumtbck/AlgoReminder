@@ -35,16 +35,6 @@
 			path = AlgoReminder;
 			sourceTree = "<group>";
 		};
-		1FEE5D612E5C21DC0007DC4F /* AlgoReminderTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AlgoReminderTests;
-			sourceTree = "<group>";
-		};
-		1FEE5D6B2E5C21DC0007DC4F /* AlgoReminderUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AlgoReminderUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				1FEE5D4D2E5C21DB0007DC4F /* AlgoReminder */,
-				1FEE5D612E5C21DC0007DC4F /* AlgoReminderTests */,
-				1FEE5D6B2E5C21DC0007DC4F /* AlgoReminderUITests */,
 				1FEE5D4C2E5C21DB0007DC4F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				1FEE5D602E5C21DC0007DC4F /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				1FEE5D612E5C21DC0007DC4F /* AlgoReminderTests */,
-			);
 			name = AlgoReminderTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				1FEE5D6A2E5C21DC0007DC4F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				1FEE5D6B2E5C21DC0007DC4F /* AlgoReminderUITests */,
 			);
 			name = AlgoReminderUITests;
 			packageProductDependencies = (
@@ -392,18 +374,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = AlgoReminder/AlgoReminder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7MN2FJ679U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "素晴らしき日々～不連続存在～";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.720;
 				PRODUCT_BUNDLE_IDENTIFIER = cumtbck.AlgoReminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -416,19 +403,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=macosx*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = AlgoReminder/AlgoReminder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7MN2FJ679U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "素晴らしき日々～不連続存在～";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.720;
 				PRODUCT_BUNDLE_IDENTIFIER = cumtbck.AlgoReminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
