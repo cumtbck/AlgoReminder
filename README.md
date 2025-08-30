@@ -21,3 +21,6 @@ MacOS >=15.0
 🥲 写了玩的，体验一下Claude Code
 
 全自动，确实智能hehehehehe
+
+图标什么的自己改改😩，名称也是；
+
